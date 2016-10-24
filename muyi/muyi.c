@@ -234,8 +234,10 @@ PHP_FUNCTION(encodeStr)
     {
         RETURN_FALSE;
     }
-    str = base64url_encode(ret,ret_length);
-    RETURN_STRINGL((char*)str,ret_length,0);
+    ret = php_strtr(ret,ret_length,"+/","-_",2);
+    php_trim(ret,ret_length,"=",1,return_value,2 TSRMLS_DC);
+    //str = base64url_encode(ret,ret_length);
+    //RETURN_STRINGL((char*)str,ret_length,0);
 }
 /* }}} */
 
